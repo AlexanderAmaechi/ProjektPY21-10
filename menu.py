@@ -1,5 +1,6 @@
 import pygame
 
+
 class Menu():
     def __init__(self, game):
         self.game = game
@@ -16,14 +17,15 @@ class Menu():
         pygame.display.update()
         self.game.reset_keys()
 
+
 class MainMenu(Menu):
     def __init__(self, game):
         Menu.__init__(self, game)
         self.state = "Start"
-        self.startx, self.starty = self.mid_w, self.mid_h + 30
-        self.optionsx, self.optionsy = self.mid_w, self.mid_h + 50
-        self.creditsx, self.creditsy = self.mid_w, self.mid_h + 70
-        self.cursor_rect.midtop = (self.startx + self.offset, self.starty)
+        self.astarx, self.astary = self.mid_w, self.mid_h + 30
+        self.dijkx, self.dijky = self.mid_w, self.mid_h + 50
+        self.bfsx, self.bfsy = self.mid_w, self.mid_h + 70
+        self.cursor_rect.midtop = (self.astarx + self.offset, self.astary)
 
     def display_menu(self):
         self.run_display = True
@@ -32,33 +34,32 @@ class MainMenu(Menu):
             self.check_input()
             self.game.display.fill(self.game.BLACK)
             self.game.draw_text('Main Menu', 20, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 20)
-            self.game.draw_text("Astar (A*)", 20, self.startx, self.starty)
-            self.game.draw_text("Dijkstra", 20, self.optionsx, self.optionsy)
-            self.game.draw_text("Breath First Search", 20, self.creditsx, self.creditsy)
+            self.game.draw_text("Astar (A*)", 20, self.astarx, self.astary)
+            self.game.draw_text("Dijkstra", 20, self.dijkx, self.dijky)
+            self.game.draw_text("Breath First Search", 20, self.bfsx, self.bfsy)
             self.draw_cursor()
             self.blit_screen()
-
 
     def move_cursor(self):
         if self.game.DOWN_KEY:
             if self.state == 'Astar (A*)':
-                self.cursor_rect.midtop = (self.optionsx + self.offset, self.optionsy)
+                self.cursor_rect.midtop = (self.dijkx + self.offset, self.dijky)
                 self.state = 'Dijkstra'
             elif self.state == 'Dijkstra':
-                self.cursor_rect.midtop = (self.creditsx + self.offset, self.creditsy)
+                self.cursor_rect.midtop = (self.bfsx + self.offset, self.bfsy)
                 self.state = 'Breath First Search'
             elif self.state == 'Breath First Search':
-                self.cursor_rect.midtop = (self.startx + self.offset, self.starty)
+                self.cursor_rect.midtop = (self.astarx + self.offset, self.astary)
                 self.state = 'Astar (A*)'
         elif self.game.UP_KEY:
             if self.state == 'Astar (A*)':
-                self.cursor_rect.midtop = (self.creditsx + self.offset, self.creditsy)
+                self.cursor_rect.midtop = (self.bfsx + self.offset, self.bfsy)
                 self.state = 'Breath First Search'
             elif self.state == 'Dijkstra':
-                self.cursor_rect.midtop = (self.startx + self.offset, self.starty)
+                self.cursor_rect.midtop = (self.astarx + self.offset, self.astary)
                 self.state = 'Astar (A*)'
             elif self.state == 'Breath First Search':
-                self.cursor_rect.midtop = (self.optionsx + self.offset, self.optionsy)
+                self.cursor_rect.midtop = (self.dijkx + self.offset, self.dijky)
                 self.state = 'Dijkstra'
 
     def check_input(self):

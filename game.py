@@ -8,11 +8,12 @@ YELLOW = (255, 255, 0)
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 PURPLE = (128, 0, 128)
-ORANGE = (255, 165 ,0)
+ORANGE = (255, 165, 0)
 GREY = (128, 128, 128)
 TURQUOISE = (64, 224, 208)
 
 pygame.display.set_caption("Path Finding Algorithm")
+
 
 class Game():
     def __init__(self):
@@ -20,8 +21,8 @@ class Game():
         self.running, self.playing = True, False
         self.UP_KEY, self.DOWN_KEY, self.START_KEY, self.BACK_KEY = False, False, False, False
         self.DISPLAY_W, self.DISPLAY_H = 800, 800
-        self.display = pygame.Surface((self.DISPLAY_W,self.DISPLAY_H))
-        self.window = pygame.display.set_mode(((self.DISPLAY_W,self.DISPLAY_H)))
+        self.display = pygame.Surface((self.DISPLAY_W, self.DISPLAY_H))
+        self.window = pygame.display.set_mode(((self.DISPLAY_W, self.DISPLAY_H)))
         self.font_name = pygame.font.get_default_font()
         self.BLACK, self.WHITE = (0, 0, 0), (255, 255, 255)
         self.main_menu = MainMenu(self)
@@ -31,12 +32,11 @@ class Game():
         while self.playing:
             self.check_events()
             if self.START_KEY:
-                self.playing=True
+                self.playing = False
             self.display.fill(self.BLACK)
-            self.window.blit(self.display, (0,0))
+            self.window.blit(self.display, (0, 0))
             pygame.display.update()
             self.reset_keys()
-
 
     def check_events(self):
         for event in pygame.event.get():
@@ -56,9 +56,9 @@ class Game():
     def reset_keys(self):
         self.UP_KEY, self.DOWN_KEY, self.START_KEY, self.BACK_KEY = False, False, False, False
 
-    def draw_text(self, text, size, x, y ):
-        font = pygame.font.Font(self.font_name,size)
+    def draw_text(self, text, size, x, y):
+        font = pygame.font.Font(self.font_name, size)
         text_surface = font.render(text, True, self.WHITE)
         text_rect = text_surface.get_rect()
-        text_rect.center = (x,y)
-        self.display.blit(text_surface,text_rect)
+        text_rect.center = (x, y)
+        self.display.blit(text_surface, text_rect)
