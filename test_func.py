@@ -2,7 +2,7 @@ import unittest
 from astar import *
 
 
-class TestAstar(unittest.TestCase):
+class TestAStar(unittest.TestCase):
 
     def test_heuristic(self):
         h_test = h((9, 4), (10, 7))
