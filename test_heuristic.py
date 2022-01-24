@@ -11,11 +11,6 @@ class TestAStar(unittest.TestCase):
         self.assertEqual(h_test, 4)
         self.assertEqual(h2_test, 107)
 
-    def test_clickedPos(self):
-        pos_test = get_clicked_pos((203, 101), 200, 800)
-
-        self.assertEqual(pos_test, (50, 25))
-
 
 if __name__ == '__main__':
     unittest.main()
